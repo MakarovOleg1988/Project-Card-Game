@@ -60,7 +60,7 @@ namespace Cards
 
             if (Physics.Raycast(rayOrigin, rayDirection, out hitinfo))
             {
-                if (hitinfo.transform.tag == _distinationDeskTag1)
+                if (hitinfo.transform.tag == "Desk1")
                 {
                     transform.position = hitinfo.transform.position;
                 }

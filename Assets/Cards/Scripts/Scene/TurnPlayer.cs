@@ -17,7 +17,7 @@ namespace Cards
             if (_turnSide == false)
             {
                 _Player2.transform.localScale = new Vector3(150f, 0, 150f);
-                _Player1.transform.localScale = new Vector3(155f, 0, 155f);
+                _Player1.transform.localScale = new Vector3(170f, 0, 170f);
                 
                 Color color1 = _spritePlayer1.material.color;
                 color1.a = 255f;
@@ -28,7 +28,7 @@ namespace Cards
             }
             else if (_turnSide == true)
             {
-                _Player2.transform.localScale = new Vector3(155f, 0, 155f);
+                _Player2.transform.localScale = new Vector3(170f, 0, 170f);
                 _Player1.transform.localScale = new Vector3(150f, 0, 150f);
 
                 Color color1 = _spritePlayer1.material.color;
