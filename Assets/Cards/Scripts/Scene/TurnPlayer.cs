@@ -4,7 +4,13 @@ namespace Cards
 {
     public class TurnPlayer : MonoBehaviour
     {
-        public static bool _turnSide { get; set; }
+        private bool _turnSide = false;
+
+        public bool TurnSide
+        {
+            get { return _turnSide; }
+            private set {; }
+        }
 
         [SerializeField] GameObject _Player1;
         [SerializeField] GameObject _Player2;

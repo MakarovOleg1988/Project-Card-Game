@@ -21,6 +21,8 @@ namespace Cards
         private Card[] _deckPlayer1;
         private Card[] _deckPlayer2;
 
+        TurnPlayer turnPlayer;
+
         private void Awake()
         {
             _baseMat = new Material(Shader.Find("TextMeshPro/Sprite"));
@@ -65,8 +67,8 @@ namespace Cards
 
         private void Update()
         {
-            if (TurnPlayer._turnSide == true) CreateHandDeckPlayer1();
-            if (TurnPlayer._turnSide == false) CreateHandDeckPlayer2();
+            if (turnPlayer.TurnSide == true) CreateHandDeckPlayer1();
+            if (turnPlayer.TurnSide == false) CreateHandDeckPlayer2();
 
         }
 
