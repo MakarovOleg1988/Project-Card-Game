@@ -22,8 +22,10 @@ namespace Cards
 		public ushort Health;
 		[Width(65)]
 		public CardUnitType Type;
+        public bool HasTaunt;
+        public bool HasCharge;
 
-		public CardParamsData GetParams()
+        public CardParamsData GetParams()
 		{
 			return new CardParamsData(Cost, Attack, Health);
 		}

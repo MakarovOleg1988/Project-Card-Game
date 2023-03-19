@@ -1,5 +1,6 @@
 using Cards.ScriptableObjects;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 namespace Cards
@@ -15,16 +16,18 @@ namespace Cards
         [Space, SerializeField] private Transform _deckPositionPlayer1;
         [SerializeField] private Transform _deckPositionPlayer2;
 
-        [Space, SerializeField] private PlayerHand _handPlayer1;
-        [SerializeField] private PlayerHand _handPlayer2;
+        [Space, SerializeField] public PlayerHand _handPlayer1;
+        [SerializeField] public PlayerHand _handPlayer2;
 
-        private Card[] _deckPlayer1;
-        private Card[] _deckPlayer2;
+        public Card[] _deckPlayer1;
+        public Card[] _deckPlayer2;
+        private int _maxID = -1;
 
-        TurnPlayer turnPlayer;
+        public TurnPlayer turnPlayer;
 
         private void Awake()
         {
+            turnPlayer = GetComponent<TurnPlayer>();
             _baseMat = new Material(Shader.Find("TextMeshPro/Sprite"));
             _baseMat.renderQueue = 2995;
 
@@ -55,14 +58,19 @@ namespace Cards
                 picture.mainTexture = randomCard.Texture;
 
                 deck[i].Configuration(picture, randomCard, CardUtility.GetDescriptionById(randomCard.Id));
+                for (int a = 0; a < _allCards.Count; a++)
+                {
+                    deck[i]._inGameID = _maxID;
+                    _maxID++;
+                }
             }
             return deck;
         }
 
-        private void Start()
+        private void Start() 
         {
-            _deckPlayer1 = CreateDeck(_deckPositionPlayer1);
             _deckPlayer2 = CreateDeck(_deckPositionPlayer2);
+            _deckPlayer1 = CreateDeck(_deckPositionPlayer1);
         }
 
         private void Update()
@@ -77,15 +85,19 @@ namespace Cards
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Card index = null;
+                int id = -1;
                 for (int i = _deckPlayer1.Length - 1; i >= 0; i--)
                 {
                     if (_deckPlayer1[i] != null)
                     {
                             index = _deckPlayer1[i];
+                            id = _deckPlayer1[i]._inGameID;
+                            index._inGameID = id;
+                            index.IsFrontSide = true;
                             _deckPlayer1[i] = null;
                             break;
-                        }
                     }
+                }
                 _handPlayer1.SetNewCard(index);
             }
         }
@@ -95,11 +107,15 @@ namespace Cards
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Card index = null;
+                int id = -1;
                 for (int i = _deckPlayer2.Length - 1; i >= 0; i--)
                 {
                     if (_deckPlayer2[i] != null)
                     {
                         index = _deckPlayer2[i];
+                        id = _deckPlayer2[i]._inGameID;
+                        index._inGameID = id;
+                        index.IsFrontSide = true;
                         _deckPlayer2[i] = null;
                         break;
                     }

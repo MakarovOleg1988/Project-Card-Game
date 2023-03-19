@@ -5,7 +5,7 @@ namespace Cards
 {
     public class PlayerHand : MonoBehaviour
     {
-        private Card[] _cardInHand;
+        public Card[] _cardInHand;
 
         [SerializeField] private Transform[] _positions;
 

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Desk1
   - Desk2
+  - GameArea
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX

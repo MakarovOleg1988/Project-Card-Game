@@ -179,7 +179,7 @@ namespace Cards
                                 {
                                     if (hitinfo.transform.tag == "Desk2")
                                     {
-                                        transform.position = hitinfo.transform.position + new Vector3(0F,10F,0F);
+                                        transform.position = hitinfo.transform.position;
                                         State = CardStateType.InTable;
                                         _tableManager.SetCurrentTurnCard(this);
                                 }
