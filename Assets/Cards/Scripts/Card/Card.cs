@@ -2,7 +2,6 @@ using System;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Cards
 {
@@ -26,16 +25,14 @@ namespace Cards
         public CardStateType State { get; set; }
 
         public int _inGameID = -1;
-
         public int Health;
         public int Attack;
-
         public bool IsTaunt;
         public bool IsCharge;
         public bool IsFrontSide;
         public bool IsFrontSize => _frontCard.activeSelf;
 
-        void Start()
+        private void Start()
         {
             GameObject cm = GameObject.FindGameObjectWithTag("GameArea");
             _cardManager = cm.GetComponent<CardManager>();
@@ -57,7 +54,7 @@ namespace Cards
             IsTaunt = data.HasTaunt;
         }
 
-        Vector3 MouseWorldPosition()
+        private Vector3 MouseWorldPosition()
         {
             Vector3 mouseScreenPosition = Input.mousePosition;
             mouseScreenPosition.z = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -85,7 +82,8 @@ namespace Cards
                 }
             }
         }
-        void Update()
+
+        private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -140,7 +138,8 @@ namespace Cards
                 }
             }
         }
-            public void OnEndDrag(PointerEventData eventData)
+
+        public void OnEndDrag(PointerEventData eventData)
         {
                 Debug.Log("OnEndDrag");
                 if (!IsFrontSide)
@@ -157,8 +156,8 @@ namespace Cards
                         {
                             if (CheckPlayerIsCard() == 1)
                             {
-                                var rayOrigin = Camera.main.transform.position;
-                                var rayDirection = MouseWorldPosition() - Camera.main.transform.position;
+                                Vector3 rayOrigin = Camera.main.transform.position;
+                                Vector3 rayDirection = MouseWorldPosition() - Camera.main.transform.position;
                                 RaycastHit hitinfo;
                                 if (Physics.Raycast(rayOrigin, rayDirection, out hitinfo))
                                 {
@@ -172,8 +171,8 @@ namespace Cards
                             }
                         else if (CheckPlayerIsCard() == 2)
                         {
-                                var rayOrigin = Camera.main.transform.position;
-                                var rayDirection = MouseWorldPosition() - Camera.main.transform.position;
+                                Vector3 rayOrigin = Camera.main.transform.position;
+                                Vector3 rayDirection = MouseWorldPosition() - Camera.main.transform.position;
                                 RaycastHit hitinfo;
                                 if (Physics.Raycast(rayOrigin, rayDirection, out hitinfo))
                                 {
@@ -222,13 +221,13 @@ namespace Cards
 
         [ContextMenu("SwitchVisual")]
         public void SwitchVisual() => _frontCard.SetActive(!IsFrontSize);
+        
         public void TakeDamage(int damage)
         {
             Health -= damage;
             _health.text = Health.ToString();
             if (Health <= 0)
             {
-                // Карта погибает
                 Destroy(this.gameObject);
                 Debug.Log("Карта погибает");
             }

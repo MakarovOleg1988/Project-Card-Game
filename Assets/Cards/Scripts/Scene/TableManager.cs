@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 namespace Cards
@@ -23,7 +21,8 @@ namespace Cards
 
         private bool isPlayerAttacking1 = false;
         private bool isPlayerAttacking2 = false;
-        void Update()
+        
+        private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             { 

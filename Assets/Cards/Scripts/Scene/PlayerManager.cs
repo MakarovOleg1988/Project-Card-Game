@@ -1,32 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class PlayerManager : MonoBehaviour
+
+namespace Cards
 {
-    public float PlayerHealth;
-
-    [SerializeField]private Slider _sliderPlayer;
-
-    void Start()
+    public class PlayerManager : MonoBehaviour
     {
-        
-    }
+        public float PlayerHealth;
 
-    void Update()
-    {
-        
-    }
+        [SerializeField] private Slider _sliderPlayer;
 
-    public void TakePlayerDamage(int damage)
-    {
-        PlayerHealth -= damage;
-        _sliderPlayer.value = PlayerHealth;
-
-        if(PlayerHealth <= 0)
+        public void TakePlayerDamage(int damage)
         {
-            // Смерть игрока
+            PlayerHealth -= damage;
+            _sliderPlayer.value = PlayerHealth;
+
+            if (PlayerHealth <= 0)
+            {
+                Debug.Log("Player died");
+            }
+            Debug.Log("Player attacked");
         }
-        Debug.Log("Player attacked");
     }
 }

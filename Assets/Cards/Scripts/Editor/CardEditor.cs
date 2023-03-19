@@ -1,6 +1,4 @@
-using Cards;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,10 +18,12 @@ namespace Cards
             EditorWindow wnd = GetWindow<CardEditor>();
             wnd.titleContent = new GUIContent("Create Deck");
         }
+
         public void OnInspectorGUI()
         {
 
         }
+
         public void CreateGUI()
         {
             rootVisualElement.Add(new Label("Добавьте карты в колоду"));
@@ -31,18 +31,19 @@ namespace Cards
             List<CardPropertiesData> _allCards;
             IEnumerable<CardPropertiesData> cards = new List<CardPropertiesData>();
             _packs = FindObjectsOfType<CardPackConfiguration>();
+            
             foreach (var pack in _packs)
             {
                 cards = pack.UnionProperties(cards);
             }
             _allCards = new List<CardPropertiesData>(cards);
 
-            var splitView = new TwoPaneSplitView(0, 250, TwoPaneSplitViewOrientation.Horizontal);
+            TwoPaneSplitView splitView = new TwoPaneSplitView(0, 250, TwoPaneSplitViewOrientation.Horizontal);
             rootVisualElement.Add(splitView);
 
-            var leftPane = new ListView();
+            ListView leftPane = new ListView();
             splitView.Add(leftPane);
-            var rightPane = new VisualElement();
+            VisualElement rightPane = new VisualElement();
             splitView.Add(rightPane);
 
             leftPane.makeItem = () => new Label();
