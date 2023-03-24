@@ -163,7 +163,7 @@ namespace Cards
                                 {
                                     if (hitinfo.transform.tag == "Desk1")
                                     {
-                                        transform.position = hitinfo.transform.position + new Vector3(0F,10F,0F);
+                                        transform.position = hitinfo.transform.position + new Vector3(0F,0.1F,0F);
                                         State = CardStateType.InTable;
                                         _tableManager.SetCurrentTurnCard(this);
                                     }
@@ -178,7 +178,7 @@ namespace Cards
                                 {
                                     if (hitinfo.transform.tag == "Desk2")
                                     {
-                                        transform.position = hitinfo.transform.position + new Vector3(0F,10F,0F);
+                                        transform.position = hitinfo.transform.position + new Vector3(0F, 0.1F,0F);
                                         State = CardStateType.InTable;
                                         _tableManager.SetCurrentTurnCard(this);
                                 }
@@ -198,9 +198,10 @@ namespace Cards
                 case CardStateType.InDesk:
                     break;
                 case CardStateType.InHand:
-                    transform.localScale *= 1.4f;
+                    transform.localScale = new Vector3(100f, 1f, 140f);
                     break;
                 case CardStateType.InTable:
+                    transform.localScale = new Vector3(100f, 1f, 140f);
                     break;
             }
         }
@@ -212,9 +213,10 @@ namespace Cards
                 case CardStateType.InDesk:
                     break;
                 case CardStateType.InHand:
-                    transform.localScale /= 1.4f;
+                    transform.localScale = new Vector3(70f, 1f, 100f);
                     break;
                 case CardStateType.InTable:
+                    transform.localScale = new Vector3(70f, 1f, 100f);
                     break;
             }
         }
@@ -232,6 +234,7 @@ namespace Cards
                 Debug.Log("Карта погибает");
             }
         }
+
         public int CheckPlayerIsCard()
         {
             int player = 0;
@@ -244,7 +247,7 @@ namespace Cards
                         if (c != null)
                         if (c._inGameID == this._inGameID)
                         {
-                                player  = 1;
+                                player = 1;
                                 break;
                         }
                     }

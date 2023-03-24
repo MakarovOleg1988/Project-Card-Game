@@ -9,49 +9,50 @@ namespace Cards
 
         public bool isTurnedPlayer = false;
 
-        [SerializeField] GameObject _Player1;
-        [SerializeField] GameObject _Player2;
+        [SerializeField] private GameObject _Player1;
+        [SerializeField] private GameObject _Player2;
+        private Transform _TurnLine;
 
         [SerializeField] Slider _Player1Health;
         [SerializeField] Slider _Player2Health;
 
-        [SerializeField] MeshRenderer _spritePlayer1;
-        [SerializeField] MeshRenderer _spritePlayer2;
+        [SerializeField] Renderer _FramePlayer1;
+        [SerializeField] Renderer _FramePlayer2;
+
+        private void Awake()
+        {
+            _TurnLine = GameObject.Find("TurnLine").transform;
+        }
 
         public void Start()
         {
             _tableManager = GetComponent<TableManager>();
             if (TurnSide == false)
             {
-                _Player2.transform.localScale = new Vector3(150f, 0, 150f);
-                _Player1.transform.localScale = new Vector3(170f, 0, 170f);
-                
-                Color color1 = _spritePlayer1.material.color;
-                color1.a = 255f;
-                Color color2 = _spritePlayer2.material.color;
-                color2.a = 150f;
+                _TurnLine.rotation = Quaternion.Euler(0f, 0f, 0f);
 
                 TurnSide = !TurnSide;
+
                 _tableManager.ClearCurrentTurnCard();
                 _tableManager.NullingCard();
                 isTurnedPlayer = true;
 
+                _FramePlayer1.enabled = true;
+                _FramePlayer2.enabled = false;
+
             }
             else if (TurnSide == true)
             {
-                _Player2.transform.localScale = new Vector3(170f, 0, 170f);
-                _Player1.transform.localScale = new Vector3(150f, 0, 150f);
-
-                Color color1 = _spritePlayer1.material.color;
-                color1.a = 150f;
-                Color color2 = _spritePlayer2.material.color;
-                color2.a = 255f;
+                _TurnLine.rotation = Quaternion.Euler(0f, 0f, 180f);
 
                 TurnSide = !TurnSide;
 
                 _tableManager.ClearCurrentTurnCard();
                 _tableManager.NullingCard();
                 isTurnedPlayer = false;
+
+                _FramePlayer1.enabled = false;
+                _FramePlayer2.enabled = true;
             }
         }
     }
