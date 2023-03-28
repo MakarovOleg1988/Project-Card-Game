@@ -8,7 +8,7 @@ namespace Cards
     {
         private Material _baseMat;
         private List<CardPropertiesData> _allCards;
-        [SerializeField, Range(25,35)] private int _cardInDeck = 60;
+        [SerializeField, Range(25,35)] private int _cardInDeck = 30;
         [SerializeField] private Card _cardPrefab;
         [SerializeField] CardPackConfiguration[] _packs;
 
@@ -39,8 +39,8 @@ namespace Cards
 
         private Card[] CreateDeck(Transform parent)
         {
-            var deck = new Card[_cardInDeck];
-            var offset = new Vector3(0f, 0f, 0f);
+            Card[] deck = new Card[_cardInDeck];
+            Vector3 offset = new Vector3(0f, 0f, 0f);
 
             for (int i = 0; i < _cardInDeck; i++)
             {
@@ -48,9 +48,9 @@ namespace Cards
                 deck[i].transform.localPosition = offset;
                 offset.y += 0.5f;
 
-                var randomCard = _allCards[Random.Range(0, _allCards.Count)];
+                CardPropertiesData randomCard = _allCards[Random.Range(0, _allCards.Count)];
 
-                var picture = new Material(_baseMat);
+                Material picture = new Material(_baseMat);
                 picture.mainTexture = randomCard.Texture;
 
                 deck[i].Configuration(picture, randomCard, CardUtility.GetDescriptionById(randomCard.Id));

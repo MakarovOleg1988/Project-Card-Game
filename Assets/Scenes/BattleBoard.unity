@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 146777206}
   - component: {fileID: 146777205}
   - component: {fileID: 146777209}
+  - component: {fileID: 146777210}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -539,6 +540,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerHealth: 30
   _sliderPlayer: {fileID: 381458032}
+--- !u!114 &146777210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146777204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a0cda9863cc274cb4c9841ebb0a3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerAvatar: {fileID: 146777206}
+  _mageImage: {fileID: 2100000, guid: 96f1efd130eb66d4a839e8736c354f97, type: 2}
+  _priestImage: {fileID: 2100000, guid: 8be2c36ee9d7be7488d4403b9cc607cf, type: 2}
 --- !u!1 &147615924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,7 +1596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _turnPlayer: {fileID: 450583804}
   _player1: {fileID: 146777209}
-  _player2: {fileID: 2021580939}
+  _player2: {fileID: 0}
   _cardManager: {fileID: 450583803}
   CurrentTurnCards1: []
   CurrentTurnCards2: []
